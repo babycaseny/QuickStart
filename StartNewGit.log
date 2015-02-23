@@ -1,0 +1,48 @@
+echo ""tom@BKGOVWKS04:~$ echo "#QuickStart shellscripts" >> README.md
+tom@BKGOVWKS04:~$ git init
+Initialized empty Git repository in /home/tom/.git/
+tom@BKGOVWKS04:~$ cd .git
+tom@BKGOVWKS04:~/.git$ ls -laà
+ls: invalid option -- '�'
+Try 'ls --help' for more information.
+tom@BKGOVWKS04:~/.git$ ls -la
+total 40
+drwxrwxr-x  7 tom tom 4096 Feb 23 18:25 .
+drwxr-xr-x 29 tom tom 4096 Feb 23 18:25 ..
+drwxrwxr-x  2 tom tom 4096 Feb 23 18:25 branches
+-rw-rw-r--  1 tom tom   92 Feb 23 18:25 config
+-rw-rw-r--  1 tom tom   73 Feb 23 18:25 description
+-rw-rw-r--  1 tom tom   23 Feb 23 18:25 HEAD
+drwxrwxr-x  2 tom tom 4096 Feb 23 18:25 hooks
+drwxrwxr-x  2 tom tom 4096 Feb 23 18:25 info
+drwxrwxr-x  4 tom tom 4096 Feb 23 18:25 objects
+drwxrwxr-x  4 tom tom 4096 Feb 23 18:25 refs
+tom@BKGOVWKS04:~/.git$ cat config
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+tom@BKGOVWKS04:~/.git$ cd ..
+tom@BKGOVWKS04:~$ git add README.md
+tom@BKGOVWKS04:~$ vi StartPrimaryMongoDB.sh
+tom@BKGOVWKS04:~$ chmod u+x StartPrimaryMongoDB.sh 
+tom@BKGOVWKS04:~$ git add StartPrimaryMongoDB.sh 
+tom@BKGOVWKS04:~$ git commit -m "first commit"
+[master (root-commit) 2deb5e5] first commit
+ 2 files changed, 2 insertions(+)
+ create mode 100644 README.md
+ create mode 100755 StartPrimaryMongoDB.sh
+tom@BKGOVWKS04:~$ git remote add origin https://github.com/babycaseny/QuickStart.git
+tom@BKGOVWKS04:~$ git push -u origin master
+Username for 'https://github.com': babycaseny
+Password for 'https://babycaseny@github.com': 
+Counting objects: 4, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 414 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/babycaseny/QuickStart.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+tom@BKGOVWKS04:~$ 
+
