@@ -1,13 +1,17 @@
-# Create some directories
-mkdir -p ./s0/ ./s1/rs0 ./s1/rs1 ./s1/rs2 ./cfg/
+#!/bin/bash
+## Create some directories
+# mkdir -p ./s0/ ./s1/rs0 ./s1/rs1 ./s1/rs2 ./cfg/
+# Abauv lain wa yusing nai fur direktoris wa krieiten
 
 # Start first shard 
-mongod --logpath "s0.log" --dbpath ./s0/ --port 37017 --fork --shardsvr
+mongod --replSet shard01 --logpath "shard01a.log" --dbpath ./shard01/shard01a --port 47017 --fork --shardsvr
+mongod --replSet shard01 --logpath "shard01b.log" --dbpath ./shard01/shard01b --port 47018 --fork --shardsvr
+mongod --replSet shard01 --logpath "shard01c.log" --dbpath ./shard01/shard01c --port 47019 --fork --shardsvr
 
 # Start second shard
-mongod --replSet s1 --logpath "s1-r0.log" --dbpath ./s1/rs0 --port 47017 --fork --shardsvr
-mongod --replSet s1 --logpath "s1-r1.log" --dbpath ./s1/rs1 --port 47018 --fork --shardsvr
-mongod --replSet s1 --logpath "s1-r2.log" --dbpath ./s1/rs2 --port 47019 --fork --shardsvr
+mongod --replSet shard02 --logpath "shard02a.log" --dbpath ./shard02/shard02a --port 47027 --fork --shardsvr
+mongod --replSet shard02 --logpath "shard02b.log" --dbpath ./shard02/shard02b --port 47028 --fork --shardsvr
+mongod --replSet shard02 --logpath "shard02c.log" --dbpath ./shard02/shard02c --port 47029 --fork --shardsvr
 
 # Start config server and mongos
 mongod --logpath "cfg.log" --dbpath ./cfg/ --port 57040 --fork --configsvr
