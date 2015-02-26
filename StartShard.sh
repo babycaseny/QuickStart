@@ -1,6 +1,10 @@
 #!/bin/bash
 # Details please read:
 # http://stackoverflow.com/questions/19580202/can-1-shard-server-have-replica-set-while-the-rest-dont
+
+# move to default directory first
+cd /opt/nx/mongodb
+
 ## Create some directories
 mkdir -p ./shard01/shard01a ./shard01/shard01b ./shard01/shard01c 
 mkdir -p ./shard02/shard02a ./shard02/shard02b ./shard02/shard02c 
