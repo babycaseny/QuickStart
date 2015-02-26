@@ -8,7 +8,7 @@ cd /opt/nx/mongodb
 ## Create some directories
 mkdir -p ./shard01/shard01a ./shard01/shard01b ./shard01/shard01c 
 mkdir -p ./shard02/shard02a ./shard02/shard02b ./shard02/shard02c 
-mkdir -p ./cfg/
+mkdir -p ./config01 ./config02 ./config03
 
 # Start first shard 
 mongod --replSet shard01 --logpath "shard01a.log" --dbpath ./shard01/shard01a --port 47017 --fork --shardsvr
@@ -20,11 +20,13 @@ mongod --replSet shard02 --logpath "shard02a.log" --dbpath ./shard02/shard02a --
 mongod --replSet shard02 --logpath "shard02b.log" --dbpath ./shard02/shard02b --port 47028 --fork --shardsvr
 mongod --replSet shard02 --logpath "shard02c.log" --dbpath ./shard02/shard02c --port 47029 --fork --shardsvr
 
-# Start config server
-mongod --logpath "cfg.log" --dbpath ./cfg/ --port 57040 --fork --configsvr
+# Start config servers
+mongod --logpath "config01.log" --dbpath ./config01 --port 60101 --fork --configsvr
+mongod --logpath "config02.log" --dbpath ./config02 --port 60102 --fork --configsvr
+mongod --logpath "config03.log" --dbpath ./config03 --port 60103 --fork --configsvr
 
 # Now, start mongos as well
-mongos --logpath "mongos.log" --configdb localhost:57040 --fork
+mongos --logpath "mongos.log" --configdb localhost:60001 --fork
 
 # Configure shard01
 mongo --port 47017 << 'EOF'
