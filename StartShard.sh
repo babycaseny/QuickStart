@@ -50,8 +50,8 @@ EOF
 
 ## Configure sharding
 #mongo <<'EOF'
-#db.adminCommand( { addshard : "localhost:37017" } );
-#db.adminCommand( { addshard : "s1/"+"localhost:47017,localhost:47018,localhost:47019" } );
+#db.adminCommand( { addshard : "shard01/"+"localhost:47017,localhost:47018,localhost:47019" } );
+#db.adminCommand( { addshard : "shard02/"+"localhost:47027,localhost:47028,localhost:47029" } );
 #db.adminCommand({enableSharding: "test"})
 #db.adminCommand({shardCollection: "test.foo", key: {bar: 1}});
 #EOF
