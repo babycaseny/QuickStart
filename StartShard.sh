@@ -33,7 +33,7 @@ rs.initiate(
 EOF
 
 # Configure shard02
-mongo --port 47017 << 'EOF'
+mongo --port 47027 << 'EOF'
 rs.initiate(
     { _id: "shard02", members:[
         { _id : 0, host : "localhost:47027" },
@@ -42,11 +42,11 @@ rs.initiate(
     });
 EOF
 
-
-# Configure sharding
-mongo <<'EOF'
-db.adminCommand( { addshard : "localhost:37017" } );
-db.adminCommand( { addshard : "s1/"+"localhost:47017,localhost:47018,localhost:47019" } );
-db.adminCommand({enableSharding: "test"})
-db.adminCommand({shardCollection: "test.foo", key: {bar: 1}});
-EOF
+## Configure sharding
+#mongo <<'EOF'
+#db.adminCommand( { addshard : "localhost:37017" } );
+#db.adminCommand( { addshard : "s1/"+"localhost:47017,localhost:47018,localhost:47019" } );
+#db.adminCommand({enableSharding: "test"})
+#db.adminCommand({shardCollection: "test.foo", key: {bar: 1}});
+#EOF
+# Details please check documentation
