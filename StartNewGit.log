@@ -1,10 +1,7 @@
-echo ""tom@BKGOVWKS04:~$ echo "#QuickStart shellscripts" >> README.md
+tom@BKGOVWKS04:~$ echo "#QuickStart shellscripts" >> README.md
 tom@BKGOVWKS04:~$ git init
 Initialized empty Git repository in /home/tom/.git/
 tom@BKGOVWKS04:~$ cd .git
-tom@BKGOVWKS04:~/.git$ ls -laà
-ls: invalid option -- '�'
-Try 'ls --help' for more information.
 tom@BKGOVWKS04:~/.git$ ls -la
 total 40
 drwxrwxr-x  7 tom tom 4096 Feb 23 18:25 .
