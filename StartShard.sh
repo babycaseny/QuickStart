@@ -60,6 +60,3 @@ db.adminCommand( {shardCollection: "test.foo", key: {bar: 1}});
 use demo
 for (var i=0; i < 100000; i++) {db.books.save( {name:"Book of Change"})}
 EOF
-
-# mongos> use demo
-# mongos> for (var i=0; i < 100000; i++) {db.books.save( {name:"Book of Change"})}
