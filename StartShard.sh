@@ -1,6 +1,7 @@
 #!/bin/bash
 # Details please read:
 # http://stackoverflow.com/questions/19580202/can-1-shard-server-have-replica-set-while-the-rest-dont
+# please replace all "localhost" instances with the actual hostname
 
 # move to default directory first
 cd /opt/nx/mongodb
