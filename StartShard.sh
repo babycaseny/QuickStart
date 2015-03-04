@@ -29,3 +29,34 @@ mongod --logpath "config03.log" --dbpath ./config/config03 --port 60103 --fork -
 # Now, start mongos as well
 mongos --logpath "mongos.log" --port 60001 --configdb MW-GAMP103240:60101,MW-GAMP103240:60102,MW-GAMP103240:60103 --fork
 
+# Configure shard01
+mongo --port 47017 << 'EOF'
+rs.initiate(
+    { _id: "shard01", members:[
+        { _id : 0, host : "MW-GAMP103240:47017" },
+        { _id : 1, host : "MW-GAMP103240:47018" },
+        { _id : 2, host : "MW-GAMP103240:47019" }]
+    });
+EOF
+
+# Configure shard02
+mongo --port 47027 << 'EOF'
+rs.initiate(
+    { _id: "shard02", members:[
+        { _id : 0, host : "MW-GAMP103240:47027" },
+        { _id : 1, host : "MW-GAMP103240:47028" },
+        { _id : 2, host : "MW-GAMP103240:47029" }]
+    });
+EOF
+
+# Configure sharding
+mongo --port 60001 <<'EOF'
+db.adminCommand( { addshard : "shard01/"+"MW-GAMP103240:47017,MW-GAMP103240:47018,MW-GAMP103240:47019" } );
+db.adminCommand( { addshard : "shard02/"+"MW-GAMP103240:47027,MW-GAMP103240:47028,MW-GAMP103240:47029" } );
+db.adminCommand( {enableSharding: "test"});
+db.adminCommand( {shardCollection: "test.foo", key: {bar: 1}});
+
+# Details please check documentation
+use demo
+for (var i=0; i < 100000; i++) {db.books.save( {name:"Book of Change"})}
+EOF
