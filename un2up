@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import copy, sys
+from pyPdf import PdfFileWriter, PdfFileReader
+input = PdfFileReader(sys.stdin)
+output = PdfFileWriter()
+for i in range(input.getNumPages()):
+    p = input.getPage(i)
+    q = copy.copy(p)
+
+    bl = p.mediaBox.lowerLeft
+    ur = p.mediaBox.upperRight
+
+    print >> sys.stderr, 'splitting page',i
+    print >> sys.stderr, '\tlowerLeft:',p.mediaBox.lowerLeft
+    print >> sys.stderr, '\tupperRight:',p.mediaBox.upperRight
+
+    p.mediaBox.upperRight = (ur[0], (bl[1]+ur[1])/2)
+    p.mediaBox.lowerLeft = bl
+
+    q.mediaBox.upperRight = ur
+    q.mediaBox.lowerLeft = (bl[0], (bl[1]+ur[1])/2)
+    if i%2==0:
+        output.addPage(q)
+        output.addPage(p)
+    else:
+        output.addPage(p)
+        output.addPage(q)
+
+output.write(sys.stdout)
